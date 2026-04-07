@@ -538,6 +538,33 @@ nav{
 .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
 .cta-email{font-size:13px;color:var(--md);margin-top:16px;position:relative;z-index:1}
 .cta-email a{color:var(--accent)}
+<<<<<<< HEAD
+/* Contact Form */
+.cf{max-width:640px;margin:0 auto;position:relative;z-index:1;text-align:left}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:560px){.cf-row{grid-template-columns:1fr}}
+.cf-group{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
+.cf-group label{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--md)}
+.cf-group input,.cf-group textarea,.cf-group select{
+  background:rgba(255,255,255,.04);border:1px solid var(--bd);border-radius:var(--r2);
+  padding:14px 18px;font-family:'Satoshi',sans-serif;font-size:14px;color:#fff;outline:none;
+  transition:border-color .2s,background .2s;width:100%;resize:none;appearance:none;
+  -webkit-appearance:none
+}
+.cf-group select option{background:var(--dark2);color:#fff}
+.cf-group input::placeholder,.cf-group textarea::placeholder{color:rgba(255,255,255,.25)}
+.cf-group input:focus,.cf-group textarea:focus,.cf-group select:focus{
+  border-color:rgba(0,212,255,.5);background:rgba(0,212,255,.04)
+}
+.cf-group textarea{min-height:130px}
+.cf-submit{width:100%;margin-top:8px;justify-content:center;font-size:15px;padding:16px 28px;border-radius:var(--r2)}
+.cf-note{font-size:12px;color:rgba(255,255,255,.3);text-align:center;margin-top:14px}
+.cf-note a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.cf-success{display:none;background:rgba(124,252,110,.07);border:1px solid rgba(124,252,110,.25);border-radius:var(--r2);padding:20px 24px;text-align:center;margin-top:12px}
+.cf-success.show{display:block}
+.cf-success p{color:var(--a3);font-weight:600;font-size:15px}
+=======
+>>>>>>> 02f57df3f6641c45b77f12f8997724a6a5f4ffd5
 
 /* ════════════════════════
    FOOTER
@@ -891,10 +918,47 @@ footer{background:var(--dark);border-top:1px solid var(--bd);padding:clamp(40px,
 <!-- ═══ CTA ═══ -->
 <section class="cta" id="contact">
   <div class="cta-glow"></div>
+<<<<<<< HEAD
+  <span class="sec-eye dk rv">Contact</span>
+  <h2 class="rv d1">Ready to Build<br>Something <em>Great?</em></h2>
+  <p class="rv d2">Tell us about your project — we'll get back within 24 hours.</p>
+
+  <form class="cf rv d3" id="contactForm" onsubmit="handleCF(event)">
+    <div class="cf-row">
+      <div class="cf-group">
+        <label for="cf-name">Your Name</label>
+        <input type="text" id="cf-name" name="name" placeholder="Alex Johnson" required autocomplete="name">
+      </div>
+      <div class="cf-group">
+        <label for="cf-email">Email Address</label>
+        <input type="email" id="cf-email" name="email" placeholder="alex@company.com" required autocomplete="email">
+      </div>
+    </div>
+    <div class="cf-group">
+      <label for="cf-service">Service Needed</label>
+      <select id="cf-service" name="service">
+        <option value="">— Select a service —</option>
+        <option>Web & App Development</option>
+        <option>AI Solutions</option>
+        <option>Creative Design</option>
+        <option>Cloud & SaaS</option>
+        <option>Other / Not Sure</option>
+      </select>
+    </div>
+    <div class="cf-group">
+      <label for="cf-msg">Tell Us About Your Project</label>
+      <textarea id="cf-msg" name="message" placeholder="What are you building? Budget, timeline, goals…" required></textarea>
+    </div>
+    <button type="submit" class="btn-solid cf-submit">Send Message →</button>
+    <p class="cf-note">We respect your privacy. No spam, ever. Or email directly at <a href="mailto:hello@webify-cx.com">hello@webify-cx.com</a></p>
+    <div class="cf-success" id="cfSuccess"><p>✓ Message sent! We'll be in touch within 24 hours.</p></div>
+  </form>
+=======
   <h2>Ready to Build<br>Something <em>Great?</em></h2>
   <p>Let's turn your idea into a world-class product — fast.</p>
   <div class="cta-btns"><a href="mailto:hello@webify-cx.com" class="btn-solid">Start a Project</a><a href="#services" class="btn-outline">Explore Services</a></div>
   <p class="cta-email">Or email <a href="mailto:hello@webify-cx.com">hello@webify-cx.com</a></p>
+>>>>>>> 02f57df3f6641c45b77f12f8997724a6a5f4ffd5
 </section>
 
 <!-- ═══ FOOTER ═══ -->
@@ -987,6 +1051,21 @@ document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 
 /* NAV SCROLL */
 window.addEventListener('scroll',()=>{document.getElementById('nav').style.background=window.scrollY>50?'rgba(8,11,15,.96)':'rgba(8,11,15,.85)';},{passive:true});
+<<<<<<< HEAD
+
+/* CONTACT FORM */
+function handleCF(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.cf-submit');
+  btn.textContent='Sending…';btn.disabled=true;
+  setTimeout(()=>{
+    document.getElementById('cfSuccess').classList.add('show');
+    e.target.reset();
+    btn.textContent='Send Message →';btn.disabled=false;
+  },1200);
+}
+=======
+>>>>>>> 02f57df3f6641c45b77f12f8997724a6a5f4ffd5
 </script>
 </body>
 </html>
