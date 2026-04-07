@@ -3,12 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#080B0F">
+<meta name="description" content="Webify — Edmonton's leading tech & creative agency. Custom web apps, AI solutions, brand design, and cloud infrastructure. Global delivery, world-class quality.">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Webify — Crafting Digital Experiences">
+<meta property="og:description" content="Tech company meets creative studio. Web apps, AI tools, brand design — all under one roof. Based in Edmonton, Canada.">
+<meta property="og:url" content="https://webify-cx.com/">
+<meta property="og:site_name" content="Webify">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Webify — Crafting Digital Experiences">
+<meta name="twitter:description" content="Tech company meets creative studio. Web apps, AI tools, brand design — all under one roof.">
+<link rel="canonical" href="https://webify-cx.com/">
 <title>Webify — Crafting Digital Experiences</title>
-<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@600;700&family=Satoshi:wght@400;500;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Webify","url":"https://webify-cx.com","logo":"https://webify-cx.com/logo.png","description":"Tech company meets creative studio. Web apps, AI tools, brand design, and cloud infrastructure.","address":{"@type":"PostalAddress","addressLocality":"Edmonton","addressRegion":"Alberta","addressCountry":"CA"},"contactPoint":{"@type":"ContactPoint","email":"hello@webify-cx.com","contactType":"customer service"},"sameAs":["https://github.com/webify-cx"]}</script>
+<!-- Preconnect for faster font load -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Non-render-blocking font load -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@600;700&family=Satoshi:wght@400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@600;700&family=Satoshi:wght@400;500;700&display=swap"></noscript>
 <style>
 /* ── RESET & VARS ── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+/* SKIP LINK */
+.skip-link{position:absolute;top:-44px;left:12px;background:var(--accent);color:#080B0F;padding:10px 18px;border-radius:0 0 10px 10px;font-weight:700;font-size:13px;z-index:10000;transition:top .2s;text-decoration:none}
+.skip-link:focus{top:0}
+/* FOCUS VISIBLE */
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+/* REDUCED MOTION */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
 :root{
   --dark:#080B0F;--dark2:#0E1117;--dark3:#141920;
   --light:#F5F5F0;--light2:#ECECE6;--white:#fff;
@@ -564,6 +592,99 @@ nav{
 .cf-success p{color:var(--a3);font-weight:600;font-size:15px}
 
 /* ════════════════════════
+   CHATBOT WIDGET
+════════════════════════ */
+#cb-btn{
+  position:fixed;bottom:28px;right:28px;z-index:1000;
+  width:56px;height:56px;border-radius:50%;border:none;
+  background:var(--accent);box-shadow:0 0 0 0 rgba(0,212,255,.4);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .2s,background .2s;
+  animation:cbpulse 2.5s ease-in-out infinite;
+}
+#cb-btn:hover{transform:scale(1.1);background:#fff}
+#cb-btn:hover svg path,#cb-btn:hover svg circle,#cb-btn:hover svg rect{stroke:var(--accent)}
+@keyframes cbpulse{0%,100%{box-shadow:0 0 0 0 rgba(0,212,255,.35)}60%{box-shadow:0 0 0 14px rgba(0,212,255,0)}}
+#cb-badge{
+  position:absolute;top:-4px;right:-4px;
+  width:18px;height:18px;border-radius:50%;
+  background:var(--a2);font-size:10px;font-weight:700;color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  border:2px solid var(--dark);
+}
+#cb-win{
+  position:fixed;bottom:96px;right:28px;z-index:999;
+  width:360px;max-width:calc(100vw - 40px);
+  background:var(--dark2);border:1px solid var(--bd);border-radius:20px;
+  box-shadow:0 32px 80px rgba(0,0,0,.7);
+  display:flex;flex-direction:column;overflow:hidden;
+  opacity:0;pointer-events:none;transform:translateY(16px) scale(.97);
+  transition:opacity .28s ease,transform .28s ease;
+  max-height:520px;
+}
+#cb-win.open{opacity:1;pointer-events:all;transform:translateY(0) scale(1)}
+.cb-head{
+  padding:16px 18px;background:rgba(0,212,255,.06);
+  border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:12px;flex-shrink:0;
+}
+.cb-avatar{
+  width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--accent),rgba(0,212,255,.3));
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.cb-info{flex:1}
+.cb-name{font-family:'Clash Display',sans-serif;font-size:14px;font-weight:700;color:#fff}
+.cb-status{font-size:11px;color:var(--a3);display:flex;align-items:center;gap:5px}
+.cb-dot{width:6px;height:6px;border-radius:50%;background:var(--a3);animation:cbpulse 2s infinite}
+.cb-close{background:none;border:none;color:var(--md);padding:4px;border-radius:6px;transition:color .2s;display:flex;align-items:center}
+.cb-close:hover{color:#fff}
+#cb-msgs{
+  flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;
+  scrollbar-width:thin;scrollbar-color:var(--bd) transparent;
+}
+#cb-msgs::-webkit-scrollbar{width:4px}
+#cb-msgs::-webkit-scrollbar-thumb{background:var(--bd);border-radius:2px}
+.cb-msg{display:flex;gap:8px;align-items:flex-end}
+.cb-msg.user{flex-direction:row-reverse}
+.cb-bubble{
+  max-width:82%;padding:10px 14px;border-radius:14px;
+  font-size:13px;line-height:1.6;color:#fff;word-break:break-word;
+}
+.cb-msg.bot .cb-bubble{background:rgba(255,255,255,.06);border:1px solid var(--bd);border-bottom-left-radius:4px}
+.cb-msg.user .cb-bubble{background:var(--accent);color:var(--dark);font-weight:500;border-bottom-right-radius:4px}
+.cb-av2{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.cb-av2.bot{background:linear-gradient(135deg,var(--accent),rgba(0,212,255,.3))}
+.cb-av2.user{background:rgba(255,255,255,.1)}
+.cb-typing{display:flex;align-items:center;gap:4px;padding:10px 14px;background:rgba(255,255,255,.06);border:1px solid var(--bd);border-radius:14px;border-bottom-left-radius:4px;width:fit-content}
+.cb-typing span{width:6px;height:6px;border-radius:50%;background:var(--md);animation:cbt .9s ease-in-out infinite}
+.cb-typing span:nth-child(2){animation-delay:.15s}
+.cb-typing span:nth-child(3){animation-delay:.3s}
+@keyframes cbt{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+.cb-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 12px;flex-shrink:0}
+.cb-chip{
+  padding:6px 12px;border-radius:100px;border:1px solid rgba(0,212,255,.25);
+  background:rgba(0,212,255,.05);font-size:11px;color:var(--accent);
+  transition:all .18s;font-family:'Satoshi',sans-serif;font-weight:600;
+  white-space:nowrap;
+}
+.cb-chip:hover{background:rgba(0,212,255,.12);border-color:rgba(0,212,255,.5)}
+.cb-foot{
+  padding:12px 16px;border-top:1px solid var(--bd);display:flex;gap:8px;flex-shrink:0;
+}
+#cb-input{
+  flex:1;background:rgba(255,255,255,.04);border:1px solid var(--bd);border-radius:100px;
+  padding:10px 16px;font-family:'Satoshi',sans-serif;font-size:13px;color:#fff;outline:none;
+  transition:border-color .2s;
+}
+#cb-input::placeholder{color:rgba(255,255,255,.25)}
+#cb-input:focus{border-color:rgba(0,212,255,.4)}
+#cb-send{
+  width:38px;height:38px;border-radius:50%;background:var(--accent);border:none;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;
+}
+#cb-send:hover{background:#fff;transform:scale(1.05)}
+#cb-send:hover svg path{stroke:var(--accent)}
+
+/* ════════════════════════
    FOOTER
 ════════════════════════ */
 footer{background:var(--dark);border-top:1px solid var(--bd);padding:clamp(40px,7vw,64px) clamp(20px,5vw,56px) clamp(24px,4vw,32px)}
@@ -582,9 +703,9 @@ footer{background:var(--dark);border-top:1px solid var(--bd);padding:clamp(40px,
 </style>
 </head>
 <body>
-
-<div class="cur" id="cur"></div>
-<div class="cur-ring" id="curRing"></div>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<div class="cur" id="cur" aria-hidden="true"></div>
+<div class="cur-ring" id="curRing" aria-hidden="true"></div>
 
 <!-- ═══ NAV ═══ -->
 <nav id="nav">
@@ -615,9 +736,10 @@ footer{background:var(--dark);border-top:1px solid var(--bd);padding:clamp(40px,
   <a href="#contact" class="mob-cta">Get Started</a>
 </div>
 
+<main id="main-content">
 <!-- ═══ HERO ═══ -->
 <section class="hero">
-  <canvas id="pc"></canvas>
+  <canvas id="pc" aria-hidden="true"></canvas>
   <div class="hero-inner">
     <div>
       <div class="badge"><div class="bp"></div>Edmonton, Canada · Global Reach</div>
@@ -958,11 +1080,52 @@ footer{background:var(--dark);border-top:1px solid var(--bd);padding:clamp(40px,
       <div><div class="ft-logo">Web<span>ify</span></div><p class="ft-tag">Crafting digital experiences that hit hard and load fast. Edmonton, Canada.</p></div>
       <div class="ft-col"><h4>Services</h4><ul><li><a href="#">Web & App Dev</a></li><li><a href="#">AI Solutions</a></li><li><a href="#">Creative Design</a></li><li><a href="#">Cloud & SaaS</a></li></ul></div>
       <div class="ft-col"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Work</a></li><li><a href="#">Careers</a></li><li><a href="#">Blog</a></li></ul></div>
-      <div class="ft-col"><h4>Connect</h4><ul><li><a href="https://github.com/webify-cx">GitHub</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">Twitter / X</a></li><li><a href="mailto:hello@webify-cx.com">Email</a></li></ul></div>
+      <div class="ft-col"><h4>Connect</h4><ul><li><a href="https://github.com/webify-cx" target="_blank" rel="noopener noreferrer">GitHub</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">Twitter / X</a></li><li><a href="mailto:hello@webify-cx.com">Email</a></li></ul></div>
     </div>
     <div class="ft-bot"><div class="ft-copy">© 2025 Webify. All rights reserved.</div><div class="ft-loc">📍 Edmonton, Alberta, Canada</div></div>
   </div>
 </footer>
+</main>
+
+<!-- ═══ CHATBOT WIDGET ═══ -->
+<button id="cb-btn" aria-label="Open chat" onclick="cbToggle()">
+  <div id="cb-badge">?</div>
+  <svg id="cb-ico-chat" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="var(--dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <svg id="cb-ico-close" width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:none"><path d="M5 5l10 10M15 5L5 15" stroke="var(--dark)" stroke-width="2" stroke-linecap="round"/></svg>
+</button>
+
+<div id="cb-win" role="dialog" aria-label="Webify FAQ Assistant">
+  <div class="cb-head">
+    <div class="cb-avatar">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1l7 3.9v8.2L9 17l-7-3.9V4.9z" stroke="#00D4FF" stroke-width="1.3" fill="none"/><circle cx="9" cy="9" r="2.5" fill="#00D4FF"/></svg>
+    </div>
+    <div class="cb-info">
+      <div class="cb-name">Webify Assistant</div>
+      <div class="cb-status"><span class="cb-dot"></span>Online — ask me anything</div>
+    </div>
+    <button class="cb-close" onclick="cbToggle()" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <div id="cb-msgs"></div>
+
+  <div class="cb-chips" id="cb-chips">
+    <button class="cb-chip" onclick="cbAsk('Who are you?')">Who are you?</button>
+    <button class="cb-chip" onclick="cbAsk('What is Webify?')">What is Webify?</button>
+    <button class="cb-chip" onclick="cbAsk('What services do you offer?')">Services</button>
+    <button class="cb-chip" onclick="cbAsk('How much does it cost?')">Pricing</button>
+    <button class="cb-chip" onclick="cbAsk('Where are you located?')">Location</button>
+    <button class="cb-chip" onclick="cbAsk('How do I get started?')">Get Started</button>
+  </div>
+
+  <div class="cb-foot">
+    <input type="text" id="cb-input" placeholder="Ask a question…" autocomplete="off" onkeydown="if(event.key==='Enter')cbSend()">
+    <button id="cb-send" onclick="cbSend()" aria-label="Send">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 8H2M14 8l-5-5M14 8l-5 5" stroke="var(--dark)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</div>
 
 <script>
 /* CURSOR */
@@ -998,7 +1161,8 @@ resize();
 window.addEventListener('resize',resize);
 document.addEventListener('mousemove',e=>{pmx=e.clientX;pmy=e.clientY;});
 class P{constructor(){this.r();}r(){this.x=Math.random()*W;this.y=Math.random()*H;this.vx=(Math.random()-.5)*.3;this.vy=(Math.random()-.5)*.3;this.rad=Math.random()*1.4+.4;this.life=Math.random();this.sp=Math.random()*.003+.001;}u(){this.x+=this.vx+(pmx-W/2)*.0001;this.y+=this.vy+(pmy-H/2)*.0001;this.life+=this.sp;if(this.x<0||this.x>W||this.y<0||this.y>H||this.life>1)this.r();}d(){const a=Math.sin(this.life*Math.PI)*.5;ctx.beginPath();ctx.arc(this.x,this.y,this.rad,0,6.28);ctx.fillStyle=`rgba(0,212,255,${a})`;ctx.fill();}}
-const pts=[];for(let i=0;i<90;i++)pts.push(new P());
+const ptCount=window.innerWidth<768?40:90;
+const pts=[];for(let i=0;i<ptCount;i++)pts.push(new P());
 function draw(){ctx.clearRect(0,0,W,H);for(let i=0;i<pts.length;i++){for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<100){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(0,212,255,${(1-d/100)*.06})`;ctx.lineWidth=.5;ctx.stroke();}}pts[i].u();pts[i].d();}requestAnimationFrame(draw);}
 draw();
 
@@ -1041,6 +1205,154 @@ document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 
 /* NAV SCROLL */
 window.addEventListener('scroll',()=>{document.getElementById('nav').style.background=window.scrollY>50?'rgba(8,11,15,.96)':'rgba(8,11,15,.85)';},{passive:true});
+
+/* ══════════════════════════════
+   CHATBOT — FAQ ENGINE
+══════════════════════════════ */
+const FAQ = [
+  {
+    keywords: ['who are you','who is webify','what is webify','about webify','about you','tell me about','what do you do','describe yourself','introduce'],
+    answer: "<strong>Webify</strong> is a tech company meets creative studio — headquartered in <span style='color:var(--accent)'>Edmonton, Alberta 🇨🇦</span>.<br><br>We build <strong>web & mobile apps</strong>, create <strong>AI solutions</strong>, design <strong>brands</strong>, and manage <strong>cloud infrastructure</strong> — all under one roof.<br><br>Think of us as your full-stack digital partner."
+  },
+  {
+    keywords: ['located','location','where','address','office','city','edmonton','canada','country','based'],
+    answer: "We're based in <strong>Edmonton, Alberta, Canada 🇨🇦</strong>.<br><br>We work with clients <span style='color:var(--accent)'>globally</span> — US, UK, Pakistan, UAE, and beyond. Time zones are never a barrier for us."
+  },
+  {
+    keywords: ['founded','when','history','how old','how long','established','year','since'],
+    answer: "Webify was built by a team of developers, designers, and AI engineers passionate about building things that <strong>actually work</strong>.<br><br>We've shipped <span style='color:var(--accent)'>50+ projects</span> across industries — from startups to established businesses."
+  },
+  {
+    keywords: ['team','who works','staff','employees','developers','designers','how many people','size'],
+    answer: "We're a <strong>tight-knit team</strong> of developers, UI/UX designers, brand strategists, and AI engineers.<br><br>Small enough to give you <span style='color:var(--accent)'>direct access</span> to the people building your product — no account managers in between."
+  },
+  {
+    keywords: ['contact','email','phone','reach','message','talk','speak','connect','get in touch'],
+    answer: "You can reach us at:<br>📧 <a href='mailto:hello@webify-cx.com' style='color:var(--accent)'>hello@webify-cx.com</a><br><br>Or fill the <strong>Contact Form</strong> on this page — we reply within <span style='color:var(--accent)'>24 hours</span>."
+  },
+  {
+    keywords: ['service','services','offer','provide','do you','what do','division','pillar'],
+    answer: "We offer <strong>4 core services</strong>:<br>1. <span style='color:var(--accent)'>Webify Dev</span> — Web & mobile apps (React, Next.js, Flutter)<br>2. <span style='color:var(--a2)'>Webify AI</span> — AI tools, automation, chatbots<br>3. <span style='color:var(--a3)'>Webify Creative</span> — Logo, branding, print, social<br>4. <span style='color:var(--a4)'>Webify Cloud</span> — SaaS, DevOps, cloud hosting"
+  },
+  {
+    keywords: ['price','cost','charge','rate','pricing','budget','how much','fee','expensive','cheap','affordable'],
+    answer: "Pricing depends on scope, but here's a rough idea:<br>• <strong>Branding / Logo</strong> — from $299<br>• <strong>Website</strong> — from $799<br>• <strong>Mobile App</strong> — from $1,999<br>• <strong>AI Solutions</strong> — custom quote<br><br>We'll give you a <span style='color:var(--accent)'>free quote</span> — just fill the contact form!"
+  },
+  {
+    keywords: ['time','timeline','long','deadline','deliver','fast','quick','how soon','duration','week','month'],
+    answer: "Our typical timelines:<br>• <strong>Logo / Brand Kit</strong> — 3–5 days<br>• <strong>Website (5 pages)</strong> — 1–2 weeks<br>• <strong>Full Web App</strong> — 3–6 weeks<br>• <strong>AI Automation</strong> — 2–4 weeks<br><br>We always confirm your deadline <span style='color:var(--accent)'>before starting</span>."
+  },
+  {
+    keywords: ['start','begin','get started','contact','reach','hire','work with','project','quote'],
+    answer: "Easy! Just scroll down to our <strong>Contact Form</strong> or email us at <a href='mailto:hello@webify-cx.com' style='color:var(--accent)'>hello@webify-cx.com</a> ✉️<br><br>We reply within <span style='color:var(--accent)'>24 hours</span> — tell us your idea and we'll take it from there."
+  },
+  {
+    keywords: ['canada','edmonton','location','based','where','country','city','local','timezone'],
+    answer: "We're <strong>headquartered in Edmonton, Alberta 🇨🇦</strong>.<br><br>We serve clients <span style='color:var(--accent)'>globally</span> — US, UK, Pakistan, UAE, and more. We work across all timezones."
+  },
+  {
+    keywords: ['tech','stack','technology','language','framework','react','flutter','next','node','python'],
+    answer: "Our tech stack includes:<br>• <strong>Frontend</strong> — React, Next.js, Vue<br>• <strong>Mobile</strong> — Flutter, React Native<br>• <strong>Backend</strong> — Node.js, Python, Firebase<br>• <strong>AI/ML</strong> — OpenAI, LangChain, AWS<br>• <strong>Design</strong> — Figma, Illustrator, Photoshop"
+  },
+  {
+    keywords: ['ai','artificial intelligence','automation','chatbot','llm','machine learning','openai','bot'],
+    answer: "Yes! Our <span style='color:var(--a2)'>Webify AI</span> division builds:<br>• Custom AI chatbots & assistants<br>• Business process automation<br>• LLM-powered tools<br>• Data pipelines & analytics<br><br>AI saved one of our clients <strong>30+ hours/week</strong> ⚡"
+  },
+  {
+    keywords: ['brand','branding','logo','identity','color','typography','design','creative','print','brochure','flyer'],
+    answer: "Our <span style='color:var(--a3)'>Creative Studio</span> handles everything visual:<br>• Logo & brand identity systems<br>• Business cards, brochures, flyers<br>• Social media kits & templates<br>• Pitch decks & presentations<br>• UI/UX & product design"
+  },
+  {
+    keywords: ['nda','confidential','ip','intellectual property','secret','safe','trust','legal','ownership'],
+    answer: "Your ideas are <strong>100% yours</strong>. We sign an NDA before starting any project. All code, designs, and assets are fully transferred to you upon delivery. 🔒"
+  },
+  {
+    keywords: ['support','maintain','maintenance','after','update','bug','fix','ongoing','post launch'],
+    answer: "We don't disappear after launch. We offer:<br>• <strong>Bug fixes</strong> — covered post-launch<br>• <strong>Monthly maintenance</strong> plans<br>• <strong>Feature updates</strong> — ongoing partnership<br><br>We invest in your <span style='color:var(--accent)'>long-term success</span>."
+  },
+  {
+    keywords: ['review','testimonial','client','feedback','happy','satisfied','rating','experience'],
+    answer: "Our clients love us! ⭐<br><br>&ldquo;Webify delivered our platform in record time. Code quality was beyond what we expected.&rdquo; — Ahmed Khan, RetailEdge<br><br>&ldquo;The AI automation saves 30+ hours a week. ROI visible in month one.&rdquo; — Mark Lawrence, SwiftLog"
+  },
+  {
+    keywords: ['hello','hi','hey','howdy','salam','assalam','assalamu','help','hiya'],
+    answer: "Hey there! 👋 I'm the <strong>Webify Assistant</strong>.<br>I can answer questions about our services, pricing, timelines, tech stack, and more.<br><br>What would you like to know?"
+  },
+  {
+    keywords: ['thanks','thank','great','awesome','perfect','good','nice','appreciate','thx'],
+    answer: "Happy to help! 😊 If you have more questions, just ask — or reach out at <a href='mailto:hello@webify-cx.com' style='color:var(--accent)'>hello@webify-cx.com</a> anytime."
+  }
+];
+
+const FALLBACK = "Hmm, I'm not sure about that one. 🤔<br>Try asking about <strong>services, pricing, timelines, or tech</strong> — or email us at <a href='mailto:hello@webify-cx.com' style='color:var(--accent)'>hello@webify-cx.com</a> for a direct answer!";
+
+let cbOpen = false;
+
+function cbToggle(){
+  cbOpen = !cbOpen;
+  document.getElementById('cb-win').classList.toggle('open', cbOpen);
+  document.getElementById('cb-ico-chat').style.display = cbOpen ? 'none' : 'block';
+  document.getElementById('cb-ico-close').style.display = cbOpen ? 'block' : 'none';
+  document.getElementById('cb-badge').style.display = 'none';
+  if(cbOpen){
+    const msgs = document.getElementById('cb-msgs');
+    if(!msgs.children.length) cbBotMsg("Hi! 👋 I'm the <strong>Webify Assistant</strong>. Ask me about our services, pricing, timeline, or anything else!");
+    setTimeout(()=>document.getElementById('cb-input').focus(), 300);
+  }
+}
+
+function cbBotMsg(html){
+  const msgs = document.getElementById('cb-msgs');
+  // Typing indicator
+  const typing = document.createElement('div');
+  typing.className = 'cb-msg bot';
+  typing.innerHTML = `<div class="cb-av2 bot"><svg width="12" height="12" viewBox="0 0 18 18" fill="none"><path d="M9 1l7 3.9v8.2L9 17l-7-3.9V4.9z" stroke="#00D4FF" stroke-width="1.3"/></svg></div><div class="cb-typing"><span></span><span></span><span></span></div>`;
+  msgs.appendChild(typing);
+  msgs.scrollTop = msgs.scrollHeight;
+  setTimeout(()=>{
+    typing.innerHTML = `<div class="cb-av2 bot"><svg width="12" height="12" viewBox="0 0 18 18" fill="none"><path d="M9 1l7 3.9v8.2L9 17l-7-3.9V4.9z" stroke="#00D4FF" stroke-width="1.3"/></svg></div><div class="cb-bubble">${html}</div>`;
+    msgs.scrollTop = msgs.scrollHeight;
+  }, 800);
+}
+
+function cbUserMsg(text){
+  const msgs = document.getElementById('cb-msgs');
+  const d = document.createElement('div');
+  d.className = 'cb-msg user';
+  d.innerHTML = `<div class="cb-bubble">${text}</div><div class="cb-av2 user"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="4" r="2.5" stroke="rgba(255,255,255,.6)" stroke-width="1.2"/><path d="M1 11c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="rgba(255,255,255,.6)" stroke-width="1.2" stroke-linecap="round"/></svg></div>`;
+  msgs.appendChild(d);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function cbMatch(input){
+  const q = input.toLowerCase().trim();
+  let best = null, bestScore = 0;
+  for(const faq of FAQ){
+    let score = 0;
+    for(const kw of faq.keywords){
+      if(q.includes(kw)) score += kw.length; // longer keyword match = higher score
+    }
+    if(score > bestScore){ bestScore = score; best = faq; }
+  }
+  return bestScore > 0 ? best.answer : FALLBACK;
+}
+
+function cbAsk(text){
+  if(!cbOpen) cbToggle();
+  cbUserMsg(text);
+  document.getElementById('cb-chips').style.display = 'none';
+  cbBotMsg(cbMatch(text));
+}
+
+function cbSend(){
+  const inp = document.getElementById('cb-input');
+  const text = inp.value.trim();
+  if(!text) return;
+  inp.value = '';
+  cbUserMsg(text);
+  document.getElementById('cb-chips').style.display = 'none';
+  cbBotMsg(cbMatch(text));
+}
 
 /* CONTACT FORM */
 function handleCF(e){
